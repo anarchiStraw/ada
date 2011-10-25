@@ -1,0 +1,55 @@
+!!!
+%html{ :xmlns => "http://www.w3.org/1999/xhtml", :lang => "en", 'xml:lang' => "en" }
+  %head
+    %title attentive Ada
+    = render :partial => 'layouts/meta'
+    = render :partial => 'layouts/stylesheets_include'
+
+  %body
+    = render :partial => 'layouts/flash_message'
+    #wrapper
+      #header
+        #logo
+          %h1= link_to "TwitterFetcher", root_url
+
+      #menu
+        %ul
+          %li.current_page_item
+            - url = params[:group_id] ? Youroom.group_url(params[:group_id]) : root_url
+            = link_to "Setting", url
+          - if logged_in?
+            %li= link_to "Logout", logout_path
+
+      #page
+        #content
+          .post
+            = yield
+          .clear-both
+            &nbsp;
+        #sidebar
+          = yield :sidebar
+          .clear-both
+            &nbsp;
+        .clear-both
+          &nbsp;
+
+      #footer-content
+        .column1
+          - if logged_in?
+            .account
+              Your account: #{h participation_name}
+          = yield :footer_content_left
+          &nbsp;
+        .column2
+          = yield :footer_content_right
+          &nbsp;
+
+      #footer
+        %p
+          Design by <a href="http://www.nodethirtythree.com">nodethirtythree</a> and <a href="http://www.freecsstemplates.org">Free CSS Templates</a>.
+
+    = render :partial => 'layouts/javascript_include'
+    :javascript
+      $(function(){
+        #{yield :javascript_initializers}
+      })

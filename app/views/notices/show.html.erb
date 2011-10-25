@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Calender name:</b>
+  <%= @notice.calender_name %>
+</p>
+
+<p>
+  <b>Calender url:</b>
+  <%= @notice.calender_url %>
+</p>
+
+<p>
+  <b>Youroom access token:</b>
+  <%= @notice.youroom_access_token %>
+</p>
+
+<p>
+  <b>Youroom access token secret:</b>
+  <%= @notice.youroom_access_token_secret %>
+</p>
+
+<p>
+  <b>Room name:</b>
+  <%= @notice.room_name %>
+</p>
+
+<p>
+  <b>Room:</b>
+  <%= @notice.room_id %>
+</p>
+
+<p>
+  <b>Message:</b>
+  <%= @notice.message %>
+</p>
+
+
+<%= link_to 'Edit', edit_notice_path(@notice) %> |
+<%= link_to 'Back', notices_path %>

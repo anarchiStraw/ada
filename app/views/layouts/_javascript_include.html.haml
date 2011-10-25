@@ -1,0 +1,16 @@
+%script{ :type => "text/javascript", :src => "http://www.google.com/jsapi?key=ABQIAAAA4avqV-k9TxFL9q7zhDl36hRHVb0i5pOSVWh2i0P0g-LGfU7WfxQVP47op85wjFZ4Mil8FCtdijMDPg" }
+:javascript
+  google.load("jquery", "1.3.2");
+  google.load("jqueryui", "1.7.2");
+= javascript_include_merged :base
+-# GoogleAnalytics
+//- if ::Rails.env == "production"
+//  :javascript
+//    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+//    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+//  :javascript
+//    try {
+//    var pageTracker = _gat._getTracker("UA-#{configatron.google_analytics}");
+//    pageTracker._setDomainName(".youroom.in");
+//    pageTracker._trackPageview();
+//    } catch(err) {}

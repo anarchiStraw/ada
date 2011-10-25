@@ -1,0 +1,6 @@
+= stylesheet_link_merged :base
+= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/south-street/jquery-ui.css"
+= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/south-street/ui.accordion.css"
+= yield :stylesheets
+/[if IE 6.0]
+  = stylesheet_link_tag "ie6"

@@ -1,0 +1,12 @@
+<table border="1">
+  <tr>
+    <th>カレンダー</th>
+    <th>ルーム</th>
+  </tr>
+<% @todos.each do |todo| %>
+  <tr>
+    <td><%= todo.calender_name %></td>
+    <td><%= todo.room_name %></td>
+  </tr>
+<% end %>
+</table>

@@ -1,0 +1,45 @@
+<%= form_for(@notice) do |f| %>
+  <% if @notice.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@notice.errors.count, "error") %> prohibited this notice from being saved:</h2>
+
+      <ul>
+      <% @notice.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :calender_name %><br />
+    <%= f.text_field :calender_name %>
+  </div>
+  <div class="field">
+    <%= f.label :calender_url %><br />
+    <%= f.text_field :calender_url %>
+  </div>
+  <div class="field">
+    <%= f.label :youroom_access_token %><br />
+    <%= f.text_field :youroom_access_token %>
+  </div>
+  <div class="field">
+    <%= f.label :youroom_access_token_secret %><br />
+    <%= f.text_field :youroom_access_token_secret %>
+  </div>
+  <div class="field">
+    <%= f.label :room_name %><br />
+    <%= f.text_field :room_name %>
+  </div>
+  <div class="field">
+    <%= f.label :room_id %><br />
+    <%= f.number_field :room_id %>
+  </div>
+  <div class="field">
+    <%= f.label :message %><br />
+    <%= f.text_field :message %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

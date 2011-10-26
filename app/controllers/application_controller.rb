@@ -1,6 +1,5 @@
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
-require 'Youroom'
 
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
@@ -29,31 +28,12 @@ class ApplicationController < ActionController::Base
       render "sessions/login_required"
       return
     else
-      return true if authorize?
-      render_not_found
+      return true
     end
   end
 
   def logged_in?
-    !session[:access_token].blank?
-  end
-
-  def authorize?
-    # TODO 毎回youroom側にアクセスしないと認証出来ないのは微妙かも。利用者が少ないだろうし問題ないか?
-    res = access_token_as_youroom_user.get "#{Youroom.group_url(params[:group_id])}/participations/current_participation.json"
-    case res
-    when Net::HTTPSuccess
-      participation = JSON.parse(res.body)['participation']
-      if participation &&  participation['application_admin']
-        session[:access_token] = access_token_as_youroom_user.token
-        session[:access_token_secret] = access_token_as_youroom_user.secret
-        session[:participation_name] = participation["name"]
-      else
-        reset_session
-      end
-    end
-  rescue OAuth::Unauthorized => e
-    reset_session
+    !session[:youroom_user].blank?
   end
 
   def participation_name
@@ -66,8 +46,8 @@ class ApplicationController < ActionController::Base
 
   def access_token_as_youroom_user
     @access_token_as_youroom_user ||=
-      if session[:access_token]
-        OAuth::AccessToken.new(youroom_consumer, session[:access_token], session[:access_token_secret])
+      if session[:youroom_user]
+        OAuth::AccessToken.new(youroom_consumer, session[:youroom_user].access_token, session[:youroom_user].access_token_secret)
       else
         request_token = OAuth::RequestToken.new(youroom_consumer, session[:request_token], session[:request_token_secret])
         request_token.get_access_token({}, :oauth_token => params[:oauth_token], :oauth_verifier => params[:oauth_verifier])

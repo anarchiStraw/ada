@@ -1,0 +1,25 @@
+<h1>Listing youroom_users</h1>
+
+<table>
+  <tr>
+    <th>Access token</th>
+    <th>Access token secret</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @youroom_users.each do |youroom_user| %>
+  <tr>
+    <td><%= youroom_user.access_token %></td>
+    <td><%= youroom_user.access_token_secret %></td>
+    <td><%= link_to 'Show', youroom_user %></td>
+    <td><%= link_to 'Edit', edit_youroom_user_path(youroom_user) %></td>
+    <td><%= link_to 'Destroy', youroom_user, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Youroom user', new_youroom_user_path %>

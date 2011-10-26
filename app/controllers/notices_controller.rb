@@ -24,6 +24,7 @@ class NoticesController < ApplicationController
   # GET /notices/new
   # GET /notices/new.json
   def new
+    @rooms = get_groups
     @notice = Notice.new
 
     respond_to do |format|
@@ -84,4 +85,12 @@ class NoticesController < ApplicationController
   def test
     @notice = Notice.new(params[:notice])
   end
+
+  def get_groups
+    res = access_token_as_youroom_user.get("#{Youroom.my_groups_url}.json")
+    JSON.parse(res.body).map {|item|
+      [item["group"]["name"] , item["group"]["id"]]
+    }
+  end
+
 end

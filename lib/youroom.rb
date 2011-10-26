@@ -9,7 +9,8 @@ class Youroom
   end
 
   def self.my_groups_url
-    "#{scheme}://www.#{configatron.youroom_url_options[:host]}:#{configatron.youroom_url_options[:port]}/groups/my"
+#    "#{scheme}://www.#{configatron.youroom_url_options[:host]}:#{configatron.youroom_url_options[:port]}/groups/my"
+    "https://www.#{configatron.youroom_url_options[:host]}/groups/my"
   end
 
   def self.scheme
@@ -19,4 +20,5 @@ class Youroom
       "http"
     end
   end
+  
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111021064148) do
+ActiveRecord::Schema.define(:version => 20111026055718) do
 
   create_table "notices", :force => true do |t|
     t.string   "calender_name"
@@ -25,14 +25,9 @@ ActiveRecord::Schema.define(:version => 20111021064148) do
     t.datetime "updated_at"
   end
 
-  create_table "todos", :force => true do |t|
-    t.string   "calender_name"
-    t.string   "calender_url"
-    t.string   "youroom_access_token"
-    t.string   "youroom_access_token_secret"
-    t.string   "room_name"
-    t.integer  "room_id"
-    t.string   "message"
+  create_table "youroom_users", :force => true do |t|
+    t.string   "access_token"
+    t.string   "access_token_secret"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

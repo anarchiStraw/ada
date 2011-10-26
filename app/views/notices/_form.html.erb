@@ -24,6 +24,9 @@
     <%= f.text_field :youroom_access_token %>
   </div>
   <div class="field">
+    <%= select_tag(:room_id, options_for_select(@rooms)) %>
+  </div>
+  <div class="field">
     <%= f.label :youroom_access_token_secret %><br />
     <%= f.text_field :youroom_access_token_secret %>
   </div>
@@ -42,4 +45,5 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+    <%= @rooms.inspect %>
 <% end %>

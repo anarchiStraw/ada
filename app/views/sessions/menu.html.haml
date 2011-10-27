@@ -1,9 +1,11 @@
 #header
   %p
+    youRoomアカウント: 
+    = @youroom_user.email
     = link_to "ログアウト", logout_url()
 #menu
   %p
-    = link_to "1.Googleカレンダーへのアクセス許可", "under_construction"
+    = link_to "1.Googleカレンダーへのアクセス許可", verify_google_oauth_index_url()
   %p
     = link_to "2.youRoomへの通知設定を登録", new_notice_url()
   %p

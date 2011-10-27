@@ -13,6 +13,10 @@ class Youroom
     "https://www.#{configatron.youroom_url_options[:host]}/groups/my"
   end
 
+  def self.verify_credentials_url
+    "https://www.#{configatron.youroom_url_options[:host]}/verify_credentials"
+  end
+
   def self.scheme
     if %w(production staging).include? ::Rails.env
       "https"

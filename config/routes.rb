@@ -12,8 +12,7 @@ Ada::Application.routes.draw do
     collection do
       get  'verify_youroom'
       get  'callback_youroom'
-      get  'new_google_access_token'
-      post 'request_google_access_token'
+      get  'verify_google'
       get  'callback_google'
     end
   end

@@ -1,3 +1,4 @@
+#coding:utf-8
 class OauthController < ApplicationController
   skip_before_filter :require_login, :only => %w(verify_youroom callback_youroom)
 
@@ -40,9 +41,32 @@ class OauthController < ApplicationController
   end
   
   def callback_google
-    calendars = JSON.parse(access_token_as_google_user.get(Google.all_calendars_url).body)
-    @google_account = calendars["author"]["email"]
-    render :text => @google_account
+    res = access_token_as_google_user.get('https://www.google.com/calendar/feeds/default/allcalendars/full?alt=jsonc')#Google.all_calendars_url
+
+    case res
+    when Net::HTTPFound # Moved Temporarily
+      res = access_token_as_google_user.redirect
+    end
+
+    calendars = JSON.parse(res.body)['data']
+    logger.debug(calendars.inspect)
+    display_name = calendars['author']['displayName']
+    email = calendars['author']['email']
+    @google_account = GoogleAccounts.find_by_youroom_user_id_and_email(session[:youroom_user].id, email)
+    if !@google_account
+      @google_account = GoogleAccounts.new
+      @google_account.youroom_user_id = session[:youroom_user].id
+      @google_account.display_name = display_name
+      @google_account.email = email
+    end
+    @google_account.access_token = access_token_as_google_user.token
+    @google_account.access_token_secret = access_token_as_google_user.secret
+    @google_account.save
+    
+    @msg = "以下のアカウントでGoogleカレンダーを参照します。"
+    @google_accounts = GoogleAccounts.find_all_by_youroom_user_id(session[:youroom_user].id)
+
+    render 'google_accounts/index'
   end
 
 end

@@ -16,7 +16,7 @@ Ada::Application.routes.draw do
       get  'callback_google'
     end
   end
-  resources :google_accounts
+  resources :google_accounts , :only => ['index', 'destroy']
   resources :notices
   resources :youroom_users
 

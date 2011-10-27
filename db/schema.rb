@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111027061506) do
+ActiveRecord::Schema.define(:version => 20111027075801) do
 
   create_table "google_accounts", :force => true do |t|
     t.string   "display_name"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20111027061506) do
     t.string   "access_token_secret"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "youroom_user_id"
   end
 
   create_table "notices", :force => true do |t|

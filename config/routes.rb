@@ -1,5 +1,7 @@
 Ada::Application.routes.draw do
 
+  resources :notice_settings
+
   resources :test , :only => [] do
     collection do
       get 'create_youroom_user'

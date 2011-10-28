@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111027075801) do
+ActiveRecord::Schema.define(:version => 20111028054927) do
 
   create_table "google_accounts", :force => true do |t|
     t.string   "display_name"
@@ -21,6 +21,19 @@ ActiveRecord::Schema.define(:version => 20111027075801) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "youroom_user_id"
+  end
+
+  create_table "notice_settings", :force => true do |t|
+    t.integer  "youroom_user_id"
+    t.integer  "room_number"
+    t.string   "room_name"
+    t.integer  "google_account_id"
+    t.string   "google_calendar_id"
+    t.string   "google_calendar_name"
+    t.integer  "days_before"
+    t.string   "additional_message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "notices", :force => true do |t|

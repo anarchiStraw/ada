@@ -61,7 +61,8 @@ class ApplicationController < ActionController::Base
 logger.debug("configatron.youroom.consumer.key " + configatron.youroom.consumer.key.to_s + " "+ configatron.youroom.consumer.secret.to_s)
 logger.debug("configatron.google.consumer.key " + configatron.google.consumer.key.to_s + " "+ configatron.google.consumer.secret.to_s)
 logger.debug(Google.oauth_properties.inspect)
-@google_consumer = OAuth::Consumer.new 'attentive-ada.heroku.com', 'OMNik85prDu9gCNvWakEF4F6', Google.oauth_properties
+
+     @google_consumer = OAuth::Consumer.new 'attentive-ada.heroku.com', 'OMNik85prDu9gCNvWakEF4F6', Google.oauth_properties
   end
 
   def access_token_as_google_user

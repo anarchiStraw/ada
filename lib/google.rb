@@ -14,10 +14,11 @@ class Google
   end
 
   def self.scope_calendar
-    "#{site}/calendar/feeds/"
+    "#{site}/calendar/feeds"
   end
   
   def self.all_calendars_url
     "#{scope_calendar}/default/allcalendars/full?alt=jsonc"
   end
+  
 end

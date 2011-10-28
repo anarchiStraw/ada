@@ -41,11 +41,10 @@ class OauthController < ApplicationController
   end
   
   def callback_google
-    res = access_token_as_google_user.get('https://www.google.com/calendar/feeds/default/allcalendars/full?alt=jsonc')#Google.all_calendars_url
+    res = access_token_as_google_user.get(Google.all_calendars_url)
 
-    case res
-    when Net::HTTPFound # Moved Temporarily
-      res = access_token_as_google_user.redirect
+    if res.body.match(/Moved Temporarily/)
+      res = access_token_as_google_user.get(Nokogiri.HTML(res.body).at("//a")["href"])
     end
 
     calendars = JSON.parse(res.body)['data']
@@ -65,6 +64,7 @@ class OauthController < ApplicationController
     
     @msg = "以下のアカウントでGoogleカレンダーを参照します。"
     @google_accounts = GoogleAccounts.find_all_by_youroom_user_id(session[:youroom_user].id)
+    @calendars = calendars
 
     render 'google_accounts/index'
   end

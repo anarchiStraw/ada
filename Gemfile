@@ -13,6 +13,7 @@ gem 'hoptoad_notifier'
 gem "oauth"
 gem "oauth-plugin"
 gem 'haml'
+gem 'nokogiri'
 group :production do
   gem "pg"
 end

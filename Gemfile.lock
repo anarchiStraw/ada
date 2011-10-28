@@ -60,6 +60,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.16)
     multi_json (1.0.3)
+    nokogiri (1.5.0-x86-mingw32)
     oauth (0.4.5)
     oauth-plugin (0.3.14)
       oauth (>= 0.3.5)
@@ -127,6 +128,7 @@ DEPENDENCIES
   haml
   hoptoad_notifier
   jquery-rails
+  nokogiri
   oauth
   oauth-plugin
   pg

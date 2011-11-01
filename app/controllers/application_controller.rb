@@ -1,6 +1,9 @@
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
-require 'youroom'
+load 'youroom.rb'
+load 'google_account.rb'
+load 'google_calendar.rb'
+load 'google.rb'
 
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
@@ -51,26 +54,6 @@ class ApplicationController < ActionController::Base
         OAuth::AccessToken.new(youroom_consumer, session[:youroom_user].access_token, session[:youroom_user].access_token_secret)
       else
         request_token = OAuth::RequestToken.new(youroom_consumer, session[:request_token], session[:request_token_secret])
-        request_token.get_access_token({}, :oauth_token => params[:oauth_token], :oauth_verifier => params[:oauth_verifier])
-      end
-  end
-
-  def google_consumer
-#    @google_consumer ||= OAuth::Consumer.new(
-#      configatron.google.consumer.key, configatron.google.consumer.secret, Google.oauth_properties)
-logger.debug("configatron.youroom.consumer.key " + configatron.youroom.consumer.key.to_s + " "+ configatron.youroom.consumer.secret.to_s)
-logger.debug("configatron.google.consumer.key " + configatron.google.consumer.key.to_s + " "+ configatron.google.consumer.secret.to_s)
-logger.debug(Google.oauth_properties.inspect)
-
-     @google_consumer = OAuth::Consumer.new 'attentive-ada.heroku.com', 'OMNik85prDu9gCNvWakEF4F6', Google.oauth_properties
-  end
-
-  def access_token_as_google_user
-    @access_token_as_google_user ||=
-      if session[:google_user]
-        OAuth::AccessToken.new(google_consumer, session[:google_user].access_token, session[:google_user].access_token_secret)
-      else
-        request_token = OAuth::RequestToken.new(google_consumer, session[:request_token], session[:request_token_secret])
         request_token.get_access_token({}, :oauth_token => params[:oauth_token], :oauth_verifier => params[:oauth_verifier])
       end
   end

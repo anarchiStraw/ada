@@ -33,7 +33,7 @@ class OauthController < ApplicationController
   end
   
   def verify_google
-    request_token = google_consumer.get_request_token(
+    request_token = Google.consumer.get_request_token(
       {:oauth_callback => callback_google_oauth_index_url()}, :scope => Google.scope_calendar)
     session[:request_token] = request_token.token
     session[:request_token_secret] = request_token.secret
@@ -41,31 +41,25 @@ class OauthController < ApplicationController
   end
   
   def callback_google
-    res = access_token_as_google_user.get(Google.all_calendars_url)
+    
+    request_token = OAuth::RequestToken.new(Google.consumer, session[:request_token], session[:request_token_secret])
+    access_token = request_token.get_access_token({}, :oauth_token => params[:oauth_token], :oauth_verifier => params[:oauth_verifier])
+    @google_account = GoogleAccount.new()
+    @google_account.youroom_user_id = session[:youroom_user].id
+    @google_account.access_token = access_token.token
+    @google_account.access_token_secret = access_token.secret
+    @google_account.load_google_data
 
-    if res.body.match(/Moved Temporarily/)
-      res = access_token_as_google_user.get(Nokogiri.HTML(res.body).at("//a")["href"])
+    if old = @google_account.same_account?
+      old.access_token = @google_account.access_token
+      old.access_token_secret = @google_account.access_token_secret
+      old.save
+    else
+      @google_account.save
     end
-
-    calendars = JSON.parse(res.body)['data']
-    logger.debug(calendars.inspect)
-    display_name = calendars['author']['displayName']
-    email = calendars['author']['email']
-    @google_account = GoogleAccounts.find_by_youroom_user_id_and_email(session[:youroom_user].id, email)
-    if !@google_account
-      @google_account = GoogleAccounts.new
-      @google_account.youroom_user_id = session[:youroom_user].id
-      @google_account.display_name = display_name
-      @google_account.email = email
-    end
-    @google_account.access_token = access_token_as_google_user.token
-    @google_account.access_token_secret = access_token_as_google_user.secret
-    @google_account.save
     
     @msg = "以下のアカウントでGoogleカレンダーを参照します。"
-    @google_accounts = GoogleAccounts.find_all_by_youroom_user_id(session[:youroom_user].id)
-    @calendars = calendars
-
+    @google_accounts = GoogleAccount.find_all_by_youroom_user_id(session[:youroom_user].id)
     render 'google_accounts/index'
   end
 

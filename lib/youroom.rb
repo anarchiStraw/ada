@@ -1,6 +1,10 @@
 class Youroom
+  def self.consumer
+    @@consumer ||= OAuth::Consumer.new(configatron.youroomn.consumer.key, configatron.youroom.consumer.secret, :site => "#{root_url}")
+  end
+
   def self.root_url
-     "http://youroom.in"
+     "http://www.youroom.in"
 #    "http://#{configatron.youroom_url_options[:host]}:#{configatron.youroom_url_options[:port]}"
   end
 
@@ -16,6 +20,10 @@ class Youroom
   def self.verify_credentials_url
     "https://www.#{configatron.youroom_url_options[:host]}/verify_credentials"
   end
+  
+  def self.post_url group_id
+    "https://www.youroom.in/r/#{group_id}/entries.json"
+  end
 
   def self.scheme
     if %w(production staging).include? ::Rails.env
@@ -25,4 +33,7 @@ class Youroom
     end
   end
   
+  def self.message_max_length
+    280
+  end
 end

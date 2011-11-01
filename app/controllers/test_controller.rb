@@ -3,15 +3,11 @@ class TestController < ApplicationController
   
   load 'youroom.rb'
   load 'google.rb'
+  load 'google_account.rb'
   
   def create_youroom_user
-#    credentials = JSON.parse(access_token_as_youroom_user.get("#{Youroom.verify_credentials_url}.json").body)
-    
-#    email = credentials["user"]["email"]
-#    render :text => credentials["user"]["participations"].map{|item|
-#      [item["group"]["name"], item["group"]["id"]]
-#    }.inspect
-     render :text => "aaaa"
+    a = GoogleAccount.find(1)
+    render :text => a.email + " " + a.access_token_secret
   end
 
 end

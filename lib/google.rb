@@ -12,7 +12,11 @@ class Google
       :access_token_path  => '/accounts/OAuthGetAccessToken',
     }
   end
-
+  
+  def self.consumer
+    @@consumer ||= OAuth::Consumer.new(configatron.google.consumer.key, configatron.google.consumer.secret, oauth_properties)
+  end
+  
   def self.scope_calendar
     "#{site}/calendar/feeds"
   end

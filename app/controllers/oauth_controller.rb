@@ -26,9 +26,11 @@ class OauthController < ApplicationController
     @youroom_user.save
     
     session[:youroom_user] = @youroom_user
-    session[:rooms] = credentials["user"]["participations"].map{|item|
+    debugger
+    rooms = credentials["user"]["participations"].map{|item|
       [item["group"]["name"], item["group"]["id"]]
     }
+    session[:rooms] = Hash[*rooms.flatten]
     render "sessions/menu"
   end
   
@@ -49,6 +51,10 @@ class OauthController < ApplicationController
     @google_account.access_token = access_token.token
     @google_account.access_token_secret = access_token.secret
     @google_account.load_google_data
+    calendars = @google_account.calendars.map {|calendar|
+      [calendar.title, calendar.event_feed_link]
+    }
+    session[:calendars] = Hash[*calendars]
 
     if old = @google_account.same_account?
       old.access_token = @google_account.access_token

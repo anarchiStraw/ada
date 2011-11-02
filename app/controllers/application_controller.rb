@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   layout 'application'
 
-  before_filter :require_login
+  before_filter :detect_locale, :require_login
 
   helper_method :logged_in?, :participation_name
 
@@ -27,6 +27,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+  def detect_locale
+    I18n.locale = request.headers['Accept-Language'].scan(/^[a-z]{2}/).first
+  end
+  
   def require_login
     if !logged_in?
       render "sessions/login_required"

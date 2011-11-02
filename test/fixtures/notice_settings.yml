@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  youroom_user_id: 1
+  room_number: 1
+  room_name: MyString
+  google_account_id: 1
+  google_calendar_id: MyString
+  google_calendar_name: MyString
+  days_before: 1
+  additional_message: MyString
+
+two:
+  youroom_user_id: 1
+  room_number: 1
+  room_name: MyString
+  google_account_id: 1
+  google_calendar_id: MyString
+  google_calendar_name: MyString
+  days_before: 1
+  additional_message: MyString

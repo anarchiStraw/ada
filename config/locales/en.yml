@@ -2,4 +2,41 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  application:
+    name: "Attentive Ada"
+    welcome: "Ada will post events of your Google Calendars to your room in youRoom.
+
+To user this service, please click the link below. 
+The youRoom will ask you to confirm this service."
+
+  attributes:
+    display_name: "Google account"
+    email: "email address"
+    access_token: "access token"
+    access_token_secret: "access token (cyphered)"
+    created_at: "created at"
+    updated_at: "updated at"
+    youroom_user_id: "youRoom user id"
+    room_number: "room number"
+    room_name: "room"
+    google_account_id: "Google account id"
+    google_calendar: "Google calendar"
+    google_calendar_id: "calendar's URL"
+    google_calendar_name: "calendar's title"
+    days_before: "post timing"
+    additional_message: "heading"
+
+  action:
+    home: ""
+    login: 
+      long: "Sign in with youRoom account."
+      short: "Sign in"
+    menu: "menu"
+    google_accounts_new:
+      long:  "Allow access to GoogleCalendar with Google account."
+    notice_settings_new: 
+      long: "Create a notice setting."
+      short: "New Notice setting"
+    notice_settings_create: "Notice setting was successfully created."
+    notice_settings_show: "Notice setting"
+    notice_settings_destroy: "Destroy notice setting"

@@ -3,3 +3,6 @@ db/*.sqlite3
 log/*.log
 tmp/
 .sass-cache/
+
+/attentive-ada.png
+/attentive-ada.pptx

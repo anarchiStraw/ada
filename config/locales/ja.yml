@@ -251,8 +251,8 @@ ja:
     days_before: "通知タイミング"
     additional_message: "冒頭メッセージ"
 
-  action:
-    home: ""
+  page_name:
+    home: "Home"
     login: 
       long: "youRoomアカウントでログインする"
       short: "ログイン"
@@ -262,6 +262,5 @@ ja:
     notice_settings_new: 
       long: "通知設定を登録する"
       short: "通知設定　登録"
-    notice_settings_create: "通知設定を登録しました"
-    notice_settings_show: "通知設定の内容"
-    notice_settings_destroy: ""
+    notice_settings_create: "通知設定　登録完了"
+    notice_settings_destroy: "通知設定　削除完了"

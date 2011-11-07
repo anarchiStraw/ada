@@ -1,6 +1,10 @@
 Ada::Application.routes.draw do
 
-  resources :notice_settings
+  resources :notice_settings , :except => ['edit', 'update'] do
+    collection do
+      post 'confirm'
+    end
+  end
 
   resources :test , :only => [] do
     collection do
@@ -9,7 +13,7 @@ Ada::Application.routes.draw do
   end
   
 
-  root :to => 'home#index'
+  root :to => 'sessions#menu'
   resources :oauth , :only => [] do
     collection do
       get  'verify_youroom'

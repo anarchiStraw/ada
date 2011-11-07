@@ -6,14 +6,8 @@ Ada::Application.routes.draw do
     end
   end
 
-  resources :test , :only => [] do
-    collection do
-      get 'create_youroom_user'
-    end
-  end
-  
-
   root :to => 'sessions#menu'
+  
   resources :oauth , :only => [] do
     collection do
       get  'verify_youroom'
@@ -22,9 +16,8 @@ Ada::Application.routes.draw do
       get  'callback_google'
     end
   end
-  resources :google_accounts , :only => ['index', 'destroy']
-  resources :notices
-  resources :youroom_users
+
+  resources :google_accounts , :only => ['destroy']
 
   match 'menu', :to => 'sessions#menu', :as => 'menu'
   

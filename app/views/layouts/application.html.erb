@@ -14,7 +14,6 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="../bootstrap.css" rel="stylesheet">
     <style type="text/css">
       /* Override some defaults */
       html, body {
@@ -81,17 +80,18 @@
         <div class="container">
           <%= link_to('助かる庶務のA田ちゃん', menu_path, { :class => 'brand' }) %></a>
 
+          <% if (@logged_in_as) %>
           <ul class="nav">
             <li class="active"><%= link_to 'Home', menu_path %></a></li>
-            <li><a href="#about">About</a></li>
-            <li><%= link_to 'ログアウト', logout_path %></li>
+              <li><%= link_to 'ログアウト', logout_path %></li>
           </ul>
+          <% end %>
           <% if (@logged_in_as.nil?) %>
             <%= form_tag( {:controller => 'oauth', :action => 'verify_youroom'} , {:method=>'get', :class=>'pull-right'}) do %>
               <button class="btn" type="submit">youRoomアカウントでログイン</button>
             <% end %>
           <% else %>
-            <div class="pull-right" font-color="#ffffff">youRoomアカウント: <%= @logged_in_as %></div>
+            <div class="pull-right"><font color="#ffffff">youRoomアカウント: <%= @logged_in_as %></font></div>
           <% end %>
         </div>
       </div>
@@ -100,9 +100,10 @@
     <div class="container">
 
       <div class="content">
-        <div class="page-header">
+<!--        <div class="page-header">
           <h1><%= @page_name %></h1>
         </div>
+-->
         <div class="row">
           <div class="span10">
             <% if (@logged_in_as.nil?) %>
@@ -122,6 +123,7 @@
 
       <footer>
         <p>&copy; anarchiStraw 2011</p>
+        <p>youRoom&trade;は株式会社ソニックガーデンの商標です。Google Calendar&trade;はGoogle Inc.の商標です。</p>
       </footer>
 
     </div> <!-- /container -->

@@ -183,9 +183,13 @@ ja:
       prompt: "選択してください。"
 
     submit:
-      create: "登録する"
-      update: "更新する"
-      submit: "保存する"
+      new: " 追 加 "
+      confirm: " 確 認 "
+      create: " 登 録 "
+      update: " 更 新 "
+      submit: " 保 存 "
+      destroy: " 削 除 "
+      back: " 戻 る "
 
   errors:
     format: "%{attribute}%{message}"
@@ -233,6 +237,8 @@ ja:
 
 下のリンクをクリックして、youRoomアカウントでログインしてください。
 「許可する」をクリックすると、このサービスに戻ります。"
+    about: "※このサービスはα版公開です。一通りの動作確認はしておりますが、不具合"
+    contact: "お問合せ: attentive-ada@gmail.com"
 
   attributes:
     display_name: "表示名"
@@ -252,15 +258,12 @@ ja:
     additional_message: "冒頭メッセージ"
 
   page_name:
-    home: "Home"
-    login: 
-      long: "youRoomアカウントでログインする"
-      short: "ログイン"
     menu: "メニュー"
     google_accounts_new:
-      long:  "Googleカレンダーへのアクセスを承認する"
+      long:  "GoogleカレンダーにアクセスするGoogleアカウントの利用許可"
     notice_settings_new: 
-      long: "通知設定を登録する"
-      short: "通知設定　登録"
+      long: "通知設定を追加する"
+      short: "新しい通知設定"
+    notice_settings_new_confirm: "新しい通知設定の内容確認"
     notice_settings_create: "通知設定　登録完了"
     notice_settings_destroy: "通知設定　削除完了"

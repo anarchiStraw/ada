@@ -33,9 +33,10 @@ class ApplicationController < ActionController::Base
   
   def require_login
     if !logged_in?
-      render "sessions/login_required"
+      render "sessions/menu"
       return
     else
+      @logged_in_as = session[:youroom_user].email
       return true
     end
   end
@@ -62,4 +63,24 @@ class ApplicationController < ActionController::Base
       end
   end
 
+  private
+  def refresh_external_data
+    calendars = []
+    @google_accounts = GoogleAccount.find_all_by_youroom_user_id(session[:youroom_user].id)
+    @google_accounts.each{|account|
+      account.load_google_data
+      account.calendars.each {|calendar|
+        calendars.concat [[calendar.title, calendar.event_feed_link]]
+      }
+    }
+    
+    res = access_token_as_youroom_user.get("#{Youroom.my_groups_url}.json")
+    rooms = JSON.parse(res.body).map {|item|
+      [item["group"]["name"], item["group"]["id"]]
+    }
+    
+    session[:google_accounts] = @google_accounts
+    session[:calendars] = Hash[*calendars.flatten]
+    session[:rooms] = Hash[*rooms.flatten]
+  end
 end

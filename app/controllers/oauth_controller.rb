@@ -26,12 +26,12 @@ class OauthController < ApplicationController
     @youroom_user.save
     
     session[:youroom_user] = @youroom_user
-    debugger
     rooms = credentials["user"]["participations"].map{|item|
       [item["group"]["name"], item["group"]["id"]]
     }
     session[:rooms] = Hash[*rooms.flatten]
-    render "sessions/menu"
+    @logged_in_as = @youroom_user.email
+    render "/sessions/menu"
   end
   
   def verify_google
@@ -54,7 +54,7 @@ class OauthController < ApplicationController
     calendars = @google_account.calendars.map {|calendar|
       [calendar.title, calendar.event_feed_link]
     }
-    session[:calendars] = Hash[*calendars]
+    session[:calendars] = Hash[*calendars.flatten]
 
     if old = @google_account.same_account?
       old.access_token = @google_account.access_token
@@ -62,11 +62,11 @@ class OauthController < ApplicationController
       old.save
     else
       @google_account.save
+      @msg = "Googleアカウントを追加しました。"
     end
     
-    @msg = "以下のアカウントでGoogleカレンダーを参照します。"
     @google_accounts = GoogleAccount.find_all_by_youroom_user_id(session[:youroom_user].id)
-    render 'google_accounts/index'
+    render '/sessions/menu'
   end
 
 end

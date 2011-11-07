@@ -28,10 +28,6 @@ class GoogleAccount < ActiveRecord::Base
   end
 
   def oauth_access_token
-logger.debug ('GoogleAccount.oauth_access_token-----------------')
-logger.debug (Google.consumer.to_s)
-logger.debug (self.access_token)
-logger.debug (self.access_token_secret)
     @oauth_access_token ||= OAuth::AccessToken.new(Google.consumer, self.access_token, self.access_token_secret)
   end
 end

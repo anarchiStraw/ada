@@ -1,0 +1,75 @@
+#coding:utf-8
+<% if @msg %>
+<div class="row">
+<div class="span11 offset2">
+  <div class="alert-message warning fade in" data-alert="alert" >
+    <a class="close" href="#">&times;</a>
+    <p><%= @msg %></p>
+  </div>
+</div>
+</div>
+<% end %>
+<div class="row">
+  <div class="span16">
+    <form  action="<%= new_notice_setting_url() %>" method="GET"><h1>現在の通知設定 <input type="submit" class="btn primary" value=" 追 加 " /></h1></form>
+  </div>
+  <div class="span14 offset1">
+    <table class="bordered-table">
+    <thead>
+      <tr>
+        <td>Googleアカウント</td>
+        <td>対象カレンダー</td>
+        <td>通知先ルーム</td>
+        <td>タイミング</td>
+        <td>冒頭メッセージ</td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @notice_settings %>
+      <% @notice_settings.each do |setting| %>
+        <tr>
+          <td><%= @google_accounts.select{|account| account.id=setting[:google_account_id]}[0].email %></td>
+          <td><%= setting.google_calendar_name %></td>
+          <td><%= setting.room_name %></td>
+          <td><%= NoticeSetting.days_before_options.key(setting.days_before.to_i) %></td>
+          <td><%= setting.additional_message %></td>
+          <td><%= link_to '削 除', setting, confirm: '本当に?', method: :delete %></td>
+        </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="span16">
+  <form  action="<%= verify_google_oauth_index_url() %>" method="GET"><h1>Googleアカウント<small>(カレンダーへのアクセスに利用)</small><input type="submit" class="btn primary" value=" 追 加 " /></h1></form>
+  </div>
+  <div class="span14 offset1">
+    <table class="bordered-table">
+    <tbody>
+      <% if @google_accounts %>
+      <% @google_accounts.each do |account| %>
+        <tr>
+          <td><%= account.email %></td>
+         <td><%= link_to '削 除', account, confirm: '本当に?  このアカウントを利用する通知設定も削除されます。', method: :delete %></td>
+        </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="span16">
+  <h3>このサービスについて</h3>
+    <div class="span15 offset1">
+毎朝、開始日が近いGoogleカレンダーのイベントがあればyouRoomに投稿するサービスです。<br/><br/>
+<strong>注：このサービスは開発途中です。<br/></strong>
+予告なく停止、仕様変更されうることをご承知おきください。<br/>
+基本的な機能は動作しますが、エラー処理・セキュリティ対応等は不十分であることをご理解のうえ、ご自身の責任で利用してください。<br/>
+ソースコードを<a href="https://anarchiStraw@github.com/anarchiStraw/ada.git" target="_blank">Github</a>で公開しています。<br/>
+    </div>
+  </div>
+</div>

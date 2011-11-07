@@ -1,19 +1,21 @@
 <%= form_for(@notice_setting, :url => confirm_notice_settings_path) do |f| %>
 
   <% if @notice_setting.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@notice_setting.errors.count, "error") %> prohibited this notice_setting from being saved:</h2>
-
-      <ul>
+<div class="row">
+<div class="span11 offset2">
+  <div class="alert-message error" data-alert="alert" >
+    <a class="close" href="#">&times;</a>
+    <p><h2><%= @notice_setting.errors.count %> 件の問題により登録できません:</h2></p>
       <% @notice_setting.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <p><%= msg %></p>
       <% end %>
-      </ul>
-    </div>
+  </div>
+</div>
+</div>
   <% end %>
 
   <div class="field">
-    <%= f.label t('attributes.google_calendar') %> 
+    <%= f.label t('attributes.google_calendar') %> :
     <select id="google_account_and_calendar_id" name="google_account_and_calendar_id">
       <% @google_accounts.each {|account| %>
         <optgroup label="<%= account.display_name %>">
@@ -25,19 +27,19 @@
     </select>
   </div>
   <div class="field">
-    <%= f.label t('attributes.room_name') %> 
+    <%= f.label t('attributes.room_name') %> :
     <%= f.select(:room_number, @rooms) %>
   </div>
 
   <div class="field">
-    <%= f.label t('attributes.days_before') %> 
+    <%= f.label t('attributes.days_before') %> :
     <%= f.select :days_before, NoticeSetting.days_before_options %>
   </div>
   <div class="field">
-    <%= f.label t('attributes.additional_message') %> 
+    <%= f.label t('attributes.additional_message') %> :
     <%= f.text_field :additional_message %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit({:class=>"btn primary"}) %>
   </div>
 <% end %>

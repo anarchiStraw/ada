@@ -1,0 +1,63 @@
+<% if @notice_setting.warnings.any? %>
+  <div class="row">
+  <div class="span11 offset2">
+    <div class="alert-message warning fade in" data-alert="alert" >
+      <a class="close" href="#">&times;</a>
+      <% @notice_setting.warnings.each do |msg| %>
+        <p><%= msg %></p>
+      <% end %>
+    </div>
+  </div>
+  </div>
+<% end %>
+<%= form_for(@notice_setting, :url => notice_settings_path) do |f| %>
+  <%= link_to '見直す', new_notice_setting_path %>
+  <%= f.submit(' O K ', {:class=>'btn primary'}) %>
+<% end %>
+<p>
+  <b>通知先ルーム:</b>
+  <%= @notice_setting.room_name %>
+</p>
+
+<p>
+  <b>Googleアカウント:</b>
+  <%= @google_account_name %>
+</p>
+
+<p>
+  <b>対象カレンダー:</b>
+  <%= @notice_setting.google_calendar_name %>
+</p>
+
+<p>
+  <b>通知タイミング:</b>
+  <%= NoticeSetting.days_before_options.key(@notice_setting.days_before.to_i) %>
+</p>
+
+<p>
+  <b>冒頭メッセージ:</b>
+  <%= @notice_setting.additional_message %>
+</p>
+
+<table class="bordered-table">
+  <thead>
+  <tr>
+    <th>通知される日</th>
+    <th>本文</th>
+    <th>添付ファイル</th>
+  </tr>
+  </thead>
+  <tbody>
+<% @sample_posts.each do|sample| %>
+  <% sample.each do |key, value| %>
+  <tr>
+    <td><%= key %></td>
+    <td><%= value["entry[content]"] %></td>
+    <td width="100" style="word-wrap:break-word;"><%= value["entry[attachment_attributes][data][text]"] %></td>
+  </tr>
+  <% end %>
+<% end %>
+  </tbody>
+</table>
+
+

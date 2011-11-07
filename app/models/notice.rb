@@ -15,7 +15,6 @@ class Notice
       )
       youroom_user = YouroomUser.find(setting[:youroom_user_id])
       events.each {|event|
-        debugger
         youroom_user.post(
           setting[:room_number], 
           format_message(event, setting[:additional_message].to_s)
@@ -27,16 +26,22 @@ class Notice
   def self.test setting
     consumer = Google.consumer
     google_account = GoogleAccount.find(setting[:google_account_id])
-    the_day = Date.strptime(Time.now, "%Y/%m/%d") + setting[:days_before].to_i
-    (0..20).map {|i|
+    the_day = Date.strptime(Time.now.to_s[0..9], "%Y-%m-%d") + 1 # 明日から
+    samples = []
+    3.times {|i|
       events = GoogleCalendar.events(
         google_account.oauth_access_token, 
         setting[:google_calendar_id], 
         the_day + i + setting[:days_before].to_i,
         0
       )
-      [ (the_day + i).sprintf("%Y/%m/%d"), events.each {|event| format_message(event, setting[:additional_message])}]
+      if events
+        events.each {|event|
+         samples << { (the_day + i).to_s => format_message(event, setting[:additional_message])} # Dateのまま入れて、ビューで整形したい
+        }
+      end
     }
+    samples
   end
   
   private

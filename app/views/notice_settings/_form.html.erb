@@ -1,4 +1,4 @@
-<%= form_for(@notice_setting) do |f| %>
+<%= form_for(@notice_setting, :url => confirm_notice_settings_path) do |f| %>
 
   <% if @notice_setting.errors.any? %>
     <div id="error_explanation">
@@ -13,7 +13,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label t('attributes.google_calendar') %>
+    <%= f.label t('attributes.google_calendar') %> 
     <select id="google_account_and_calendar_id" name="google_account_and_calendar_id">
       <% @google_accounts.each {|account| %>
         <optgroup label="<%= account.display_name %>">
@@ -25,16 +25,16 @@
     </select>
   </div>
   <div class="field">
-    <%= f.label t('attributes.room_name') %>
-    <%= select_tag(:room_number, options_for_select(@rooms)) %>
+    <%= f.label t('attributes.room_name') %> 
+    <%= f.select(:room_number, @rooms) %>
   </div>
 
   <div class="field">
-    <%= f.label t('attributes.days_before') %>
+    <%= f.label t('attributes.days_before') %> 
     <%= f.select :days_before, NoticeSetting.days_before_options %>
   </div>
   <div class="field">
-    <%= f.label t('attributes.additional_message') %>
+    <%= f.label t('attributes.additional_message') %> 
     <%= f.text_field :additional_message %>
   </div>
   <div class="actions">

@@ -1,6 +1,8 @@
-<h1>Listing notice_settings</h1>
+#coding:utf-8
+<h1>現在の通知設定</h1>
 
-<table>
+<table class="bordered-table">
+  <thead>
   <tr>
     <th><%= t 'attributes.room_name' %></th>
     <th><%= t 'attributes.google_account_id' %></th>
@@ -8,10 +10,9 @@
     <th><%= t 'attributes.days_before' %></th>
     <th><%= t 'attributes.additional_message' %></th>
     <th></th>
-    <th></th>
-    <th></th>
   </tr>
-
+  </thead>
+  <tbody>
 <% @notice_settings.each do |notice_setting| %>
   <tr>
     <td><%= notice_setting.room_name %></td>
@@ -19,13 +20,12 @@
     <td><%= notice_setting.google_calendar_name %></td>
     <td><%= notice_setting.days_before %></td>
     <td><%= notice_setting.additional_message %></td>
-    <td><%= link_to 'Show', notice_setting %></td>
-    <td><%= link_to 'Edit', edit_notice_setting_path(notice_setting) %></td>
-    <td><%= link_to 'Destroy', notice_setting, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to '削除', notice_setting, confirm: '本当に?', method: :delete %></td>
   </tr>
 <% end %>
+  </tbody>
 </table>
 
 <br />
 
-<%= link_to 'New Notice setting', new_notice_setting_path %>
+<%= link_to '追加', new_notice_setting_path %>

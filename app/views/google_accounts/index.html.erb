@@ -10,13 +10,13 @@
   <tr>
     <td><%= google_account.display_name %></td>
     <td><%= google_account.email %></td>
-    <td><%= link_to 'Destroy', google_account, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to '削除', google_account, confirm: '本当に?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to '追加', verify_google_oauth_index_path %>
+<%= button_to '追加', verify_google_oauth_index_path %>
 
-<%= link_to 'メニュー', menu_path %>
+<%= button_to 'メニュー', menu_path %>

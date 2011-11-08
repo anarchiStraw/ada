@@ -8,7 +8,8 @@ pit = Pit.get(
     'google.consumer.key' => '',
     'google.consumer.secret' => '',
     'google.access_token.key' => '',
-    'google.access_token.secret' => ''
+    'google.access_token.secret' => '',
+    'timezone' => ''
   })
 configatron.youroom.consumer.key = pit['youroom.consumer.key']
 configatron.youroom.consumer.secret = pit['youroom.consumer.secret']
@@ -21,3 +22,4 @@ configatron.google.consumer.secret = pit['google.consumer.secret']
 # post by below user to google
 configatron.google.access_token.key = pit['google.access_token.key']
 configatron.google.access_token.secret = pit['google.access_token.secret']
+configatron.timezone = pit['timezone']

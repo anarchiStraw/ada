@@ -9,3 +9,4 @@ configatron.google.consumer.secret = ENV['google.consumer.secret']
 # post by below user to google
 configatron.google.access_token.key = ENV['google.access_token.key']
 configatron.google.access_token.secret = ENV['google.access_token.secret']
+configatron.timezone = ENV['attentive-ada.timezone']

@@ -34,7 +34,7 @@
           <td><%= setting.room_name %></td>
           <td><%= NoticeSetting.days_before_options.key(setting.days_before.to_i) %></td>
           <td><%= setting.additional_message %></td>
-          <td><%= link_to '削 除', setting, confirm: '本当に?', method: :delete %></td>
+          <td><%= button_to('削 除', {:controller => 'notice_settings', :action => 'destroy', :id => setting.id}, {:class => 'btn', :method => :delete, :confirm => '本当に?'}) %></td>
         </tr>
       <% end %>
       <% end %>
@@ -53,7 +53,7 @@
       <% @google_accounts.each do |account| %>
         <tr>
           <td><%= account.email %></td>
-         <td><%= link_to '削 除', account, confirm: '本当に?  このアカウントを利用する通知設定も削除されます。', method: :delete %></td>
+          <td><%= button_to('削 除', {:controller => 'google_accounts', :action => 'destroy', :id => account.id}, {:class => 'btn', :method => :delete, :confirm => '本当に? このアカウントを利用する通知設定も削除されます。'}) %></td>
         </tr>
       <% end %>
       <% end %>

@@ -36,7 +36,6 @@ class Notice
         0
       )
       if events
-    pp events
         events.each {|event|
          samples << { (the_day + i).to_s => format_message(event, setting[:additional_message])} # Dateのまま入れて、ビューで整形したい
         }

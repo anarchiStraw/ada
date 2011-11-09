@@ -27,11 +27,10 @@ The youRoom will ask you to confirm this service."
     additional_message: "heading"
 
   action:
-    home: ""
+    home: "Home"
     login: 
       long: "Sign in with youRoom account."
       short: "Sign in"
-    menu: "menu"
     google_accounts_new:
       long:  "Allow access to GoogleCalendar with Google account."
     notice_settings_new: 

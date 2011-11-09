@@ -258,7 +258,7 @@ ja:
     additional_message: "冒頭メッセージ"
 
   page_name:
-    menu: "メニュー"
+    home: "ホーム"
     google_accounts_new:
       long:  "GoogleカレンダーにアクセスするGoogleアカウントの利用許可"
     notice_settings_new: 

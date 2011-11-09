@@ -20,7 +20,7 @@ Ada::Application.routes.draw do
 
   resources :google_accounts , :only => ['destroy']
 
-  root :to => 'sessions#menu'
-  match 'menu', :to => 'sessions#menu', :as => 'menu'
+  root :to => 'sessions#home'
+  match 'home', :to => 'sessions#home', :as => 'home'
   match 'logout', :to => 'sessions#destroy', :as => 'logout'
 end

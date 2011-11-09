@@ -5,7 +5,7 @@ class Notice
   def self.post(today_is = Time.now.strftime("%Y/%m/%d"))
     consumer = Google.consumer
     settings = NoticeSetting.all
-    settings.each {|setting|
+    settings.each do |setting| 
       google_account = GoogleAccount.find(setting[:google_account_id])
       events = GoogleCalendar.events(
         google_account.oauth_access_token, 
@@ -13,15 +13,19 @@ class Notice
         Date.strptime(today_is, "%Y/%m/%d") + setting[:days_before].to_i,
         0
       )
-      logger.info("Notice.post ----- get #{events.size} events for NoticeSetting[#{setting.id}]. ") if events.size > 0
+      if events 
+        logger.info("Found #{events.size} events for NoticeSetting[#{setting.id}]. ")
+      else
+        logger.info("No event was found for NoticeSetting[#{setting.id}].)
+      end
       youroom_user = YouroomUser.find(setting[:youroom_user_id])
-      events.each {|event|
+      events.each do |event|
         youroom_user.post(
           setting[:room_number], 
           format_message(event, setting[:additional_message].to_s)
         )
-      }
-    }
+      end
+    end
   end
   
   def self.test(setting, today_is = Time.now.strftime("%Y/%m/%d"))

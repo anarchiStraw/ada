@@ -29,7 +29,7 @@
       <% if @notice_settings %>
       <% @notice_settings.each do |setting| %>
         <tr>
-          <td><%= @google_accounts.select{|account| account.id=setting[:google_account_id]}[0].email %></td>
+          <td><%= @google_accounts.select{|account| account.id==setting[:google_account_id]}[0].email %></td>
           <td><%= setting.google_calendar_name %></td>
           <td><%= setting.room_name %></td>
           <td><%= NoticeSetting.days_before_options.key(setting.days_before.to_i) %></td>

@@ -1,4 +1,4 @@
-pit = Pit.get(
+resource = Rails.env.production? ? ENV : Pit.get(
   'attentive.ada',
   :require => {
     'youroom.consumer.key' => '',
@@ -9,17 +9,17 @@ pit = Pit.get(
     'google.consumer.secret' => '',
     'google.access_token.key' => '',
     'google.access_token.secret' => '',
-    'timezone' => ''
+    'attentive-ada.timezone' => ''
   })
-configatron.youroom.consumer.key = pit['youroom.consumer.key']
-configatron.youroom.consumer.secret = pit['youroom.consumer.secret']
+configatron.youroom.consumer.key = resource['youroom.consumer.key']
+configatron.youroom.consumer.secret = resource['youroom.consumer.secret']
 # post by below user to youroom
-configatron.youroom.access_token.key = pit['youroom.access_token.key']
-configatron.youroom.access_token.secret = pit['youroom.access_token.secret']
+configatron.youroom.access_token.key = resource['youroom.access_token.key']
+configatron.youroom.access_token.secret = resource['youroom.access_token.secret']
 
-configatron.google.consumer.key = pit['google.consumer.key']
-configatron.google.consumer.secret = pit['google.consumer.secret']
+configatron.google.consumer.key = resource['google.consumer.key']
+configatron.google.consumer.secret = resource['google.consumer.secret']
 # post by below user to google
-configatron.google.access_token.key = pit['google.access_token.key']
-configatron.google.access_token.secret = pit['google.access_token.secret']
-configatron.timezone = pit['timezone']
+configatron.google.access_token.key = resource['google.access_token.key']
+configatron.google.access_token.secret = resource['google.access_token.secret']
+configatron.timezone = resource['attentive-ada.timezone']

@@ -43,8 +43,11 @@ module Ada
     config.filter_parameters += [:password]
 
     # Enable the asset pipeline
-    #config.assets.enabled = false # for Heroku
-    config.assets.enabled = true # for dev
+    if Rails.env.production? then
+      config.assets.enabled = false 
+    else
+      config.assets.enabled = true
+    end
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'

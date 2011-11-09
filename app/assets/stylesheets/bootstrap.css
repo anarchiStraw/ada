@@ -937,6 +937,9 @@ textarea[readonly] {
 .actions .secondary-action a:hover {
   text-decoration: underline;
 }
+.actions form {
+  display: inline;
+}
 .help-inline, .help-block {
   font-size: 13px;
   line-height: 18px;

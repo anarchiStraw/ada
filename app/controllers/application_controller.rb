@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   
   def require_login
     if !logged_in?
-      render "sessions/menu"
+      render "sessions/home"
       return
     else
       @logged_in_as = session[:youroom_user].email

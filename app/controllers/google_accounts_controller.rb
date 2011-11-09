@@ -12,7 +12,7 @@ class GoogleAccountsController < ApplicationController
     google_account.destroy
     flash[:msg] = "Googleアカウントを削除しました。"
     respond_to do |format|
-      format.html { redirect_to url_for(:controller => 'sessions', :action=> 'menu') and return }
+      format.html { redirect_to url_for(:controller => 'sessions', :action=> 'home') and return }
       format.json { head :ok }
     end
   end

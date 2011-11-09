@@ -31,7 +31,7 @@ class OauthController < ApplicationController
     }
     session[:rooms] = Hash[*rooms.flatten]
     @logged_in_as = @youroom_user.email
-    render "/sessions/menu"
+    redirect_to  url_for(:controller => 'sessions', :action=> 'home')
   end
   
   def verify_google
@@ -66,7 +66,7 @@ class OauthController < ApplicationController
     end
     
     @google_accounts = GoogleAccount.find_all_by_youroom_user_id(session[:youroom_user].id)
-    render '/sessions/menu'
+    redirect_to  url_for(:controller => 'sessions', :action=> 'home')
   end
 
 end

@@ -1,3 +1,5 @@
+<% selected_calendar = @notice_setting.google_account_id ? @notice_setting.google_account_id.to_s + " " + @notice_setting.google_calendar_id : ""%>
+
 <%= form_for(@notice_setting, :url => confirm_notice_settings_path) do |f| %>
 
   <% if @notice_setting.errors.any? %>
@@ -20,7 +22,8 @@
       <% @google_accounts.each {|account| %>
         <optgroup label="<%= account.display_name %>">
           <% account.calendars.each {|calendar| %>
-            <option value="<%= account.id %> <%= calendar.event_feed_link %>"><%= calendar.title %></>
+            <% option_value = account.id.to_s + " " + calendar.event_feed_link %>
+            <option value="<%= option_value %>" <%= "selected" if option_value == selected_calendar %>><%= calendar.title %></>
           <% } %>
         </optgroup>
       <% } %>
@@ -28,7 +31,7 @@
   </div>
   <div class="field">
     <%= f.label t('attributes.room_name') %> :
-    <%= f.select(:room_number, @rooms) %>
+    <%= f.select(:room_number, @rooms, {:selected => @notice_setting.room_number}) %>
   </div>
 
   <div class="field">

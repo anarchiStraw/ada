@@ -252,7 +252,7 @@ ja:
     room_name: "通知先ルーム"
     google_account_id: "GoogleユーザーID"
     google_calendar: "対象カレンダー"
-    google_calendar_id: "カレンダーURL"
+    google_calendar_id: "対象カレンダー"
     google_calendar_name: "カレンダー名"
     days_before: "通知タイミング"
     additional_message: "冒頭メッセージ"

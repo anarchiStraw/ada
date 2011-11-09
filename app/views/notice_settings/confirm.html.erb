@@ -10,14 +10,6 @@
   </div>
   </div>
 <% end %>
-<%= form_for(@notice_setting, :url => notice_settings_path) do |f| %>
-  <%= link_to '見直す', new_notice_setting_path %>
-  <%= f.submit(' O K ', {:class=>'btn primary'}) %>
-<% end %>
-<p>
-  <b>通知先ルーム:</b>
-  <%= @notice_setting.room_name %>
-</p>
 
 <p>
   <b>Googleアカウント:</b>
@@ -30,6 +22,11 @@
 </p>
 
 <p>
+  <b>通知先ルーム:</b>
+  <%= @notice_setting.room_name %>
+</p>
+
+<p>
   <b>通知タイミング:</b>
   <%= NoticeSetting.days_before_options.key(@notice_setting.days_before.to_i) %>
 </p>
@@ -38,6 +35,17 @@
   <b>冒頭メッセージ:</b>
   <%= @notice_setting.additional_message %>
 </p>
+<div class="actions">
+<%= form_for(@notice_setting, :url => notice_settings_path) do |f| %>
+  <%= f.submit('登 録', {:class=>'btn primary'}) %>
+<% end %>
+<%= form_for(@notice_setting, :url => new_notice_setting_path) do |f| %>
+  <% [ :google_account_id, :google_calendar_id, :room_number, :days_before, :additional_message ].each do |attr| %>
+    <%= f.hidden_field attr %>
+  <% end %>
+  <%= f.submit('見直す', {:class =>'btn'}) %>
+<% end %>
+</div>
 
 <table class="bordered-table">
   <thead>

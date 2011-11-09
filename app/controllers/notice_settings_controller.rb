@@ -1,8 +1,4 @@
 #coding:utf-8
-load 'notice_setting.rb' #TODO delete this line
-load 'notice.rb' #TODO delete this line
-load 'google_calendar.rb' #TODO delete this line
-
 class NoticeSettingsController < ApplicationController
 
   # GET /notice_settings/new

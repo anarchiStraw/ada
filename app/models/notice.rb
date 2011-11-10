@@ -17,7 +17,7 @@ class Notice
       if events 
         logger.info("Found #{events.size} events for NoticeSetting[#{setting.id}]. ")
       else
-        logger.info("No event was found for NoticeSetting[#{setting.id}].)
+        logger.info("No event was found for NoticeSetting[#{setting.id}].")
       end
       youroom_user = YouroomUser.find(setting[:youroom_user_id])
       events.each do |event|

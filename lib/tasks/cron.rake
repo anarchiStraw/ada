@@ -1,4 +1,4 @@
-namespace :cron do
+task :cron => :environment do
   def task_with_logger_and_notify(*args, &block)
     new_block = proc {
       begin

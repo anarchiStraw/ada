@@ -14,11 +14,11 @@ class Notice
         Date.strptime(today_is, "%Y/%m/%d") + setting[:days_before].to_i,
         0
       )
-      if events 
-        logger.info("Found #{events.size} events for NoticeSetting[#{setting.id}]. ")
-      else
-        logger.info("No event was found for NoticeSetting[#{setting.id}].")
-      end
+#      if events 
+#        logger.info("Found #{events.size} events for NoticeSetting[#{setting.id}]. ")
+#      else
+#        logger.info("No event was found for NoticeSetting[#{setting.id}].")
+#      end
       youroom_user = YouroomUser.find(setting[:youroom_user_id])
       events.each do |event|
         youroom_user.post(

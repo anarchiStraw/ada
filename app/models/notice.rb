@@ -21,10 +21,12 @@ class Notice
 #      end
       youroom_user = YouroomUser.find(setting[:youroom_user_id])
       events.each do |event|
+p ("Posting...")
         youroom_user.post(
           setting[:room_number], 
           format_message(event, setting[:additional_message].to_s)
         )
+p ("Posted a message")
       end
     end
   end

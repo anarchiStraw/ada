@@ -3,7 +3,7 @@ class YouroomUser < ActiveRecord::Base
   has_many :google_accounts
   
   def post room_number, entry_hash
-p enry_hash
+p entry_hash
     res = oauth_access_token.post(Youroom.post_url(room_number), entry_hash)
 p res.body
     res.body

@@ -3,7 +3,10 @@
 require "time"
 
 class Notice
-  def self.post(today_is = Time.now.strftime("%Y/%m/%d"))
+  def self.post(today_is = nil)
+    Time.zone = configatron.timezone
+    today_is ||= Time.zone.now.strftime("%Y/%m/%d")
+p ["Time.zone", Time.zone, "today_is", today_is]
     consumer = Google.consumer
     settings = NoticeSetting.all
     settings.each do |setting| 

@@ -9,7 +9,9 @@ resource = Rails.env.production? ? ENV : Pit.get(
     'google.consumer.secret' => '',
     'google.access_token.key' => '',
     'google.access_token.secret' => '',
-    'attentive-ada.timezone' => ''
+    'attentive-ada.timezone' => '',
+    'bitly.user_id' => '',
+    'bitly.api_key' => ''
   })
 configatron.youroom.consumer.key = resource['youroom.consumer.key']
 configatron.youroom.consumer.secret = resource['youroom.consumer.secret']
@@ -23,3 +25,5 @@ configatron.google.consumer.secret = resource['google.consumer.secret']
 configatron.google.access_token.key = resource['google.access_token.key']
 configatron.google.access_token.secret = resource['google.access_token.secret']
 configatron.timezone = resource['attentive-ada.timezone']
+configatron.bitly.user_id = resource['bitly.user_id']
+configatron.bitly.api_key = resource['bitly.api_key']

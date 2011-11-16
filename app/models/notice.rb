@@ -64,11 +64,25 @@ p ("Posted a message")
     str << (" ＠" + event['location']) if (event['location'] != '')
     str << " " + event['details']
 
-    {
-      'entry[content]' => str[0..Youroom.message_max_length],
-      'entry[attachment_attributes][data][text]' => str[Youroom.message_max_length + 1].to_s + event['alternateLink'],
-      'entry[attachment_attributes][attachment_type]' => 'Text'
-    }
+      debugger
+    
+    index_before_url = str.length
+    
+    str << " " + ShortUrl.get(event['alternateLink'])
+    
+    if str.length < Youroom.message_max_length then
+      {
+        'entry[content]' => str
+      }
+    else
+      str_more = '...'
+      split_at = [(Youroom.message_max_length - str_more.length), index_before_url].min
+      {
+        'entry[content]'  => str[0..split_at] + str_more,
+        'entry[attachment_attributes][data][text]' => str[split_at + 1 .. -1],
+        'entry[attachment_attributes][attachment_type]' => 'Text'
+      }
+    end
   end
   
   def self.duration(from_str, to_str)

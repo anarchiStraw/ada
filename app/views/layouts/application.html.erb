@@ -107,12 +107,11 @@
         </div>
 -->
         <div class="row">
-          <div class="span10">
+          <div class="span16">
             <% if (@logged_in_as.nil?) %>
-              Googleカレンダーのイベントを、youRoomにお知らせします。<br/>
               右上のボタンを押して、youRoomアカウントでログインしてください。<br/>
-              <br/>
-              「許可する」を押すとこのサービスに戻ります。
+              「許可する」を押すとこのサービスに戻ります。<br/><br/>
+              <%= render 'about' %>
             <% else %>
               <%= yield %>
             <% end %>

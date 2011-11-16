@@ -16,9 +16,10 @@
 </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label t('attributes.google_calendar') %> :
-    <select id="google_account_and_calendar_id" name="google_account_and_calendar_id">
+  <div class="clearfix">
+    <%= f.label t('attributes.google_calendar') %> 
+    <div class="input">
+      <select id="google_account_and_calendar_id" name="google_account_and_calendar_id">
       <% @google_accounts.each {|account| %>
         <optgroup label="<%= account.display_name %>">
           <% account.calendars.each {|calendar| %>
@@ -27,20 +28,38 @@
           <% } %>
         </optgroup>
       <% } %>
-    </select>
-  </div>
-  <div class="field">
-    <%= f.label t('attributes.room_name') %> :
-    <%= f.select(:room_number, @rooms, {:selected => @notice_setting.room_number}) %>
+      </select>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label t('attributes.days_before') %> :
-    <%= f.select :days_before, NoticeSetting.days_before_options %>
+  <div class="clearfix">
+    <%= f.label t('attributes.use_keyword') %>
+    <div class="input">
+      <div class="input-prepend">
+        <label class="add-on"><%= f.check_box :use_keyword %></label>
+        <%= f.text_field(:keyword) %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label t('attributes.additional_message') %> :
-    <%= f.text_field :additional_message %>
+  
+  <div class="clearfix">
+    <%= f.label t('attributes.room_name') %> 
+    <div class="input">
+      <%= f.select(:room_number, @rooms, {:selected => @notice_setting.room_number}) %>
+    </div>
+  </div>
+
+  <div class="clearfix">
+    <%= f.label t('attributes.days_before') %> 
+    <div class="input">
+      <%= f.select :days_before, NoticeSetting.days_before_options %>
+    </div>
+  </div>
+  <div class="clearfix">
+    <%= f.label t('attributes.additional_message') %> 
+    <div class="input">
+      <%= f.text_field :additional_message %>
+    </div>
   </div>
 <div class="row">
   <div class="span14">

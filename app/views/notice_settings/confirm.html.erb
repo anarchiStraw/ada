@@ -22,6 +22,11 @@
 </p>
 
 <p>
+  <b>キーワードで絞り込み:</b>
+  <%= @notice_setting.use_keyword ? @notice_setting.keyword : '(なし)'%>
+</p>
+
+<p>
   <b>通知先ルーム:</b>
   <%= @notice_setting.room_name %>
 </p>
@@ -42,7 +47,7 @@
       <%= f.submit('登 録', {:class=>'btn primary'}) %>
     <% end %>
     <%= form_for(@notice_setting, :url => new_notice_setting_path) do |f| %>
-      <% [ :google_account_id, :google_calendar_id, :room_number, :days_before, :additional_message ].each do |attr| %>
+      <% [ :google_account_id, :google_calendar_id, :room_number, :days_before, :additional_message, :use_keyword, :keyword ].each do |attr| %>
         <%= f.hidden_field attr %>
       <% end %>
       <%= f.submit('見直す', {:class =>'btn'}) %>

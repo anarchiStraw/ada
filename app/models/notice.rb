@@ -15,7 +15,8 @@ p ["Time.zone", Time.zone, "today_is", today_is]
         google_account.oauth_access_token, 
         setting[:google_calendar_id], 
         Date.strptime(today_is, "%Y/%m/%d") + setting[:days_before].to_i,
-        0
+        0,
+        setting[:use_keyword] ? setting[:keyword] : nil
       )
 #      if events 
 #        logger.info("Found #{events.size} events for NoticeSetting[#{setting.id}]. ")
@@ -38,13 +39,15 @@ p ("Posted a message")
     consumer = Google.consumer
     google_account = GoogleAccount.find(setting[:google_account_id])
     the_day = Date.strptime(today_is, "%Y/%m/%d") + 1 # 明日から
+    
     samples = []
     3.times {|i|
       events = GoogleCalendar.events(
         google_account.oauth_access_token, 
         setting[:google_calendar_id], 
         the_day + i + setting[:days_before].to_i,
-        0
+        0,
+        setting[:use_keyword] ? setting[:keyword] : nil
       )
       if events
         events.each {|event|

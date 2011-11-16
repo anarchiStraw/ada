@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111107064623) do
+ActiveRecord::Schema.define(:version => 20111116164900) do
 
   create_table "google_accounts", :force => true do |t|
     t.string   "display_name"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(:version => 20111107064623) do
     t.string   "additional_message"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "keyword"
+    t.boolean  "use_keyword"
   end
 
   create_table "notices", :force => true do |t|

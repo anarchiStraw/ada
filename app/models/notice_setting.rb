@@ -9,6 +9,8 @@ class NoticeSetting < ActiveRecord::Base
   validates :google_calendar_id,
     :presence => true,
     :uniqueness => { :scope => :room_number, :message => " このルームへは、同じカレンダーからの通知設定がもうあります。" }
+  validate :keyword,
+    :presence => { :if => :use_keyword, :message => "絞り込むためのキーワードを指定してください。"}
   
   @@days_before_options = { '当日' => 0, '前日' => 1, '2日前' => 2 }
   def self.days_before_options

@@ -1,12 +1,14 @@
 class GoogleCalendar
   attr_accessor :id, :title, :event_feed_link
 
-  def self.events(oauth_access_token, google_calendar_id, start_min, duration)
+  def self.events(oauth_access_token, google_calendar_id, start_min, duration, keyword)
     Time.zone = configatron.timezone
     from = Time.zone.local(start_min.year, start_min.month, start_min.day, 0, 0)
     to = Time.zone.local(start_min.year, start_min.month, start_min.day, 23, 59)
     
     url = "#{google_calendar_id}?start-min=#{Time.zone.local_to_utc(from).strftime("%Y-%m-%dT%H:%M:%SZ")}&start-max=#{Time.zone.local_to_utc(to).strftime("%Y-%m-%dT%H:%M:%SZ")}&alt=jsonc"
+    url << "&q=#{URI.encode(keyword)}" unless keyword.nil?
+    
 p("url[" + url + "]")
     res = oauth_access_token.get(url)
     if res.body.match(/Moved Temporarily/)

@@ -8,6 +8,8 @@ class NoticeSettingsController < ApplicationController
 
     @notice_setting = NoticeSetting.new
     if request.get? then
+      @notice_setting.use_keyword = false
+      @notice_setting.keyword = "#youroom"
       refresh_external_data
     elsif request.post? then
       @google_accounts = session[:google_accounts]

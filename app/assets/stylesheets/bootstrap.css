@@ -1314,7 +1314,7 @@ table .headerSortUp.purple, table .headerSortDown.purple {
   overflow: visible;
 }
 .topbar a {
-  color: #bfbfbf;
+  color: #bdd5aa;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 .topbar h3 a:hover, .topbar .brand:hover, .topbar ul .active > a {
@@ -1341,7 +1341,7 @@ table .headerSortUp.purple, table .headerSortDown.purple {
   line-height: 40px;
 }
 .topbar p a:hover {
-  background-color: transparent;
+  background-color: #668c46;
   color: #ffffff;
 }
 .topbar form {
@@ -1463,7 +1463,7 @@ table .headerSortUp.purple, table .headerSortDown.purple {
 .nav .dropdown-toggle:hover,
 .topbar div > ul .dropdown.open .dropdown-toggle,
 .nav .dropdown.open .dropdown-toggle {
-  background: #444;
+  background: #668c46;
   background: rgba(255, 255, 255, 0.05);
 }
 .topbar div > ul .menu-dropdown,
@@ -1497,7 +1497,7 @@ table .headerSortUp.purple, table .headerSortDown.purple {
 .nav .menu-dropdown li a,
 .topbar div > ul .dropdown-menu li a,
 .nav .dropdown-menu li a {
-  color: #999;
+  color: #bdd5aa;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
 }
 .topbar div > ul .menu-dropdown li a:hover,
@@ -1598,7 +1598,7 @@ a.menu:after, .dropdown-toggle:after {
   clear: both;
   font-weight: normal;
   line-height: 18px;
-  color: #808080;
+  color: #bdd5aa;
   text-shadow: 0 1px 0 #ffffff;
 }
 .topbar .dropdown-menu a:hover,

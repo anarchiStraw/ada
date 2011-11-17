@@ -14,30 +14,34 @@
     <form  action="<%= new_notice_setting_url() %>" method="GET"><h1>現在の通知設定 <input type="submit" class="btn primary" value=" 追 加 " /></h1></form>
   </div>
   <div class="span14 offset1">
-    <table class="bordered-table">
-    <thead>
-      <tr>
-        <td>対象カレンダー<br/><small>(Googleアカウント)<small></td>
-        <td>通知先ルーム</td>
-        <td>タイミング</td>
-        <td>冒頭メッセージ</td>
-        <td></td>
-      </tr>
-    </thead>
-    <tbody>
+    <% if @google_accounts.nil? || @google_accounts.size == 0 %>
+      <span class="help-block">まず、通知対象のカレンダーにアクセスできるGoogleアカウントを登録してください。</span><br/>
+    <% else %>
       <% if @notice_settings %>
-      <% @notice_settings.each do |setting| %>
-        <tr>
-          <td><%= setting.google_calendar_name %><br/><small>(<%= @google_accounts.select{|account| account.id==setting[:google_account_id]}[0].email %>)</small></td>
-          <td><%= setting.room_name %></td>
-          <td><%= NoticeSetting.days_before_options.key(setting.days_before.to_i) %></td>
-          <td><%= setting.additional_message %></td>
-          <td><%= button_to('削 除', {:controller => 'notice_settings', :action => 'destroy', :id => setting.id}, {:class => 'btn', :method => :delete, :confirm => '本当に?'}) %></td>
-        </tr>
+        <table class="bordered-table">
+        <thead>
+          <tr>
+            <th>対象カレンダー<br/><small>(Googleアカウント)<small></th>
+            <th>通知先ルーム</th>
+            <th>タイミング</th>
+            <th>冒頭メッセージ</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @notice_settings.each do |setting| %>
+            <tr>
+              <td><%= setting.google_calendar_name %><br/><small>(<%= @google_accounts.select{|account| account.id==setting[:google_account_id]}[0].email %>)</small></td>
+              <td><%= setting.room_name %></td>
+              <td><%= NoticeSetting.days_before_options.key(setting.days_before.to_i) %></td>
+              <td><%= setting.additional_message %></td>
+              <td><%= button_to('削 除', {:controller => 'notice_settings', :action => 'destroy', :id => setting.id}, {:class => 'btn', :method => :delete, :confirm => '本当に?'}) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+        </table>
       <% end %>
-      <% end %>
-    </tbody>
-    </table>
+    <% end %>
   </div>
 </div>
 <div class="row">
@@ -45,18 +49,20 @@
   <form  action="<%= verify_google_oauth_index_url() %>" method="GET"><h1>Googleアカウント<small>(カレンダーへのアクセスに利用)</small><input type="submit" class="btn primary" value=" 追 加 " /></h1></form>
   </div>
   <div class="span14 offset1">
-    <table class="bordered-table">
-    <tbody>
-      <% if @google_accounts %>
+    <% if @google_accounts.nil? || @google_accounts.size == 0 %>
+      <br/><br/><br/>
+    <% else %>
+      <table class="bordered-table">
+      <tbody>
       <% @google_accounts.each do |account| %>
         <tr>
           <td><%= account.email %></td>
           <td><%= button_to('削 除', {:controller => 'google_accounts', :action => 'destroy', :id => account.id}, {:class => 'btn', :method => :delete, :confirm => '本当に? このアカウントを利用する通知設定も削除されます。'}) %></td>
         </tr>
       <% end %>
-      <% end %>
-    </tbody>
-    </table>
+      </tbody>
+      </table>
+    <% end %>
   </div>
 </div>
 <div class="row">

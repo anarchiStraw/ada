@@ -16,7 +16,7 @@
 </div>
   <% end %>
 
-  <div class="clearfix">
+  <div class="clearfix <%= 'error' if @notice_setting.errors.include?(:google_calendar_id) %>">
     <%= f.label t('attributes.google_calendar') %> 
     <div class="input">
       <select id="google_account_and_calendar_id" name="google_account_and_calendar_id">
@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  <div class="clearfix">
+  <div class="clearfix <%= 'error' if @notice_setting.errors.include?(:keyword) %>">
     <%= f.label t('attributes.use_keyword') %>
     <div class="input">
       <div class="input-prepend">
@@ -43,7 +43,7 @@
     </div>
   </div>
   
-  <div class="clearfix">
+  <div class="clearfix <%= 'error' if @notice_setting.errors.include?(:google_calendar_id) %>">
     <%= f.label t('attributes.room_name') %> 
     <div class="input">
       <%= f.select(:room_number, @rooms, {:selected => @notice_setting.room_number}) %>

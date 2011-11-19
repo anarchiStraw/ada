@@ -229,7 +229,7 @@ ja:
         <<: *errors_messages
 
       full_messages:
-        format: "%{attribute}%{message}"
+        format: "[%{attribute}]  %{message}"
         
   application:
     name: "助かる庶務のA田ちゃん"
@@ -255,6 +255,7 @@ ja:
     google_calendar_id: "対象カレンダー"
     google_calendar_name: "カレンダー名"
     use_keyword: "キーワードで絞り込む"
+    keyword: "キーワード"
     days_before: "通知タイミング"
     additional_message: "冒頭メッセージ"
     

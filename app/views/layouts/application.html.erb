@@ -85,9 +85,9 @@
 
           <% if (@logged_in_as) %>
           <ul class="nav">
-            <li class="active"><%= link_to 'Home', root_path %></a></li>
-            <li><%= link_to 'Contact', 'application/contact' %></a></li>
-            <li><%= link_to 'About', 'application/contact' %></a></li>
+            <li <%= "class='active'" if request.env["PATH_INFO"] =~ /(\/|\/home)$/ %>><%= link_to 'Home', root_path %></a></li>
+            <li <%= "class='active'" if request.env["PATH_INFO"] =~ /(\/about)$/ %>><%= link_to 'About', 'about' %></a></li>
+            <li <%= "class='active'" if request.env["PATH_INFO"] =~ /(\/contact)$/ %>><%= link_to 'Contact', 'contact' %></a></li>
           </ul>
           <% end %>
           <% if (@logged_in_as.nil?) %>
@@ -97,7 +97,7 @@
           <% else %>
              <ul class="nav secondary-nav">
                 <li class="dropdown" data-dropdown="dropdown">
-                  <a href="#" class="dropdown-toggle" style="color:#BDD5AA"><%= @logged_in_as %></a>
+                  <a href="#" class="dropdown-toggle"><%= @logged_in_as %></a>
                   <ul class="dropdown-menu">
                     <li><%= link_to 'ログアウト', logout_path %></li>
                   </ul>
@@ -125,9 +125,6 @@
               <%= yield %>
             <% end %>
           </div>
-<!--          <div class="span4">
-            <h3>Secondary content</h3>
-          </div> -->
         </div>
       </div>
 

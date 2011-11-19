@@ -23,4 +23,6 @@ Ada::Application.routes.draw do
   root :to => 'sessions#home'
   match 'home', :to => 'sessions#home', :as => 'home'
   match 'logout', :to => 'sessions#destroy', :as => 'logout'
+  match 'about', :to => 'application#about', :as => 'about'
+  match 'contact', :to => 'application#contact', :as => 'contact'
 end

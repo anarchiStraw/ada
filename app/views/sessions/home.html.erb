@@ -1,19 +1,17 @@
 #coding:utf-8
 <% if @msg %>
 <div class="row">
-<div class="span11 offset2">
-  <div class="alert-message warning fade in" data-alert="alert" >
-    <a class="close" href="#">&times;</a>
-    <p><%= @msg %></p>
+  <div class="span11 offset2">
+    <div class="alert-message warning fade in" data-alert="alert" >
+      <a class="close" href="#">&times;</a>
+      <p><%= @msg %></p>
+    </div>
   </div>
-</div>
 </div>
 <% end %>
 <div class="row">
-  <div class="span16">
+  <div class="span14">
     <form  action="<%= new_notice_setting_url() %>" method="GET"><h1>現在の通知設定 <input type="submit" class="btn primary" value=" 追 加 " /></h1></form>
-  </div>
-  <div class="span14 offset1">
     <% if @google_accounts.nil? || @google_accounts.size == 0 %>
       <span class="help-block">まず、通知対象のカレンダーにアクセスできるGoogleアカウントを登録してください。</span><br/>
     <% else %>
@@ -31,7 +29,11 @@
         <tbody>
           <% @notice_settings.each do |setting| %>
             <tr>
-              <td><%= setting.google_calendar_name %><br/><small>(<%= @google_accounts.select{|account| account.id==setting[:google_account_id]}[0].email %>)</small></td>
+              <td><%= setting.google_calendar_name %><br/>
+                  <small><%= "キーワード:#{setting.keyword}" if setting.use_keyword %><br/>
+                  (<%= @google_accounts.select{|account| account.id==setting[:google_account_id]}[0].email %>)</small><br/>
+                  
+                 </td>
               <td><%= setting.room_name %></td>
               <td><%= NoticeSetting.days_before_options.key(setting.days_before.to_i) %></td>
               <td><%= setting.additional_message %></td>
@@ -45,10 +47,8 @@
   </div>
 </div>
 <div class="row">
-  <div class="span16">
-  <form  action="<%= verify_google_oauth_index_url() %>" method="GET"><h1>Googleアカウント<small>(カレンダーへのアクセスに利用)</small><input type="submit" class="btn primary" value=" 追 加 " /></h1></form>
-  </div>
-  <div class="span14 offset1">
+  <div class="span14">
+    <form  action="<%= verify_google_oauth_index_url() %>" method="GET"><h1>Googleアカウント<small>(カレンダーへのアクセスに利用)</small><input type="submit" class="btn primary" value=" 追 加 " /></h1></form>
     <% if @google_accounts.nil? || @google_accounts.size == 0 %>
       <br/><br/><br/>
     <% else %>
@@ -63,56 +63,5 @@
       </tbody>
       </table>
     <% end %>
-  </div>
-</div>
-<div class="row">
-  <div class="span16">
-  <h3>このサービスは</h3>
-    <div class="span15 offset1">
-毎朝、開始日が近いGoogleカレンダーのイベントがあればyouRoomに投稿するサービスです。<br/><br/>
-<strong>注：このサービスは開発途中です。<br/></strong>
-予告なく停止、仕様変更されうることをご承知おきください。<br/>
-基本的な機能は動作しますが、エラー処理・セキュリティ対応等は不十分であることをご理解のうえ、ご自身の責任で利用してください。<br/>
-ソースコードを<a href="https://anarchiStraw@github.com/anarchiStraw/ada.git" target="_blank">Github</a>で公開しています。<br/><br/>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="span16">
-  <h3>ご意見・ご質問は</h3>
-    <div id="youroom-form-modal" class="modal hide fade">
-      <div class="modal-header">
-        <a href="#" class="close">&times;</a>
-        <h3>公開ルーム「助かる庶務のA田ちゃん」に投稿します</h3>
-      </div>
-      <form action="/notice_settings/new" method="GET">
-        <div class="modal-body">
-          <input type="radio" id="participate_options" name="participate_options" selected value="yes">ルームに参加する</input>    お名前<input type="text" name="participate_as" /><br/>
-          <input type="radio" id="participate_options" name="participate_options" value="no">参加しない</input>  (管理人名義の投稿になります)<br/>
-          <script type="text/javascript">
-            $(function(){
-            	$("#entry_content").bind("change keyup",function(){
-              	var count = $(this).val().length;
-                var max = 280;
-                $("#character-count").text(max - count);
-                if (max < count) {
-                  $("#character-count").css("color", "red");
-                } else {
-                  $("#character-count").css("color", "black");
-                }
-            	});
-            });
-          </script>
-          メッセージ：<textarea class="limit entry_content help" cols="43" id="entry_content" name="entry[content]" rows="4"></textarea><span class="count_display" id="character-count" style="color:white;">0</span>
-        </div>
-        <div class="modal-footer">
-          <input type="submit" class="btn primary" value="投稿">
-        </div>
-      </form>
-    </div>
-    <div class="span15 offset1">
-<a href="http://www.youroom.in/r/14269" target="_blank">youRoomの公開ルーム</a>にお寄せください。<!--<span  class="label notice"><a data-controls-modal="youroom-form-modal" data-backdrop="static" data-keyboard="true" class="color:#ffffff;">投稿フォーム</a></span>-->
-    </div>
   </div>
 </div>

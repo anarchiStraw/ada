@@ -29,7 +29,7 @@ p ["Time.zone", Time.zone, "today_is", today_is]
           p ("Posted a message")
         end
       else
-        logger.info("No event was found for NoticeSetting[#{setting.id}].")
+        p("No event was found for NoticeSetting[#{setting.id}].")
       end
     end
   end

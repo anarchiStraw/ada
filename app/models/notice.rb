@@ -18,19 +18,18 @@ p ["Time.zone", Time.zone, "today_is", today_is]
         0,
         setting[:use_keyword] ? setting[:keyword] : nil
       )
-#      if events 
-#        logger.info("Found #{events.size} events for NoticeSetting[#{setting.id}]. ")
-#      else
-#        logger.info("No event was found for NoticeSetting[#{setting.id}].")
-#      end
-      youroom_user = YouroomUser.find(setting[:youroom_user_id])
-      events.each do |event|
-p ("Posting...")
-        youroom_user.post(
-          setting[:room_number], 
-          format_message(event, setting[:additional_message].to_s)
-        )
-p ("Posted a message")
+      if events 
+        p ("Found #{events.size} events for NoticeSetting[#{setting.id}]. ")
+        youroom_user = YouroomUser.find(setting[:youroom_user_id])
+        events.each do |event|
+          youroom_user.post(
+            setting[:room_number], 
+            format_message(event, setting[:additional_message].to_s)
+          )
+          p ("Posted a message")
+        end
+      else
+        logger.info("No event was found for NoticeSetting[#{setting.id}].")
       end
     end
   end

@@ -14,11 +14,17 @@ p("url[" + url + "]")
     if res.body.match(/Moved Temporarily/)
       res = oauth_access_token.get(Nokogiri.HTML(res.body).at("//a")["href"])
     end
-    items = JSON.parse(res.body)['data']['items']
-    if items
-      items.reject!{|item| (start_min.to_s != Date.strptime(item['when'][0]['start']).to_s) }
+    
+    if (res.class == Net::HTTPOK)
+      items = JSON.parse(res.body)['data']['items']
+      if items
+        items.reject!{|item| (start_min.to_s != Date.strptime(item['when'][0]['start']).to_s) }
+      end
+      items
+    else
+      p JSON.parse(res.body)
+      raise "FAILED to get events from Google calendar."
     end
-    items
   end
 
   def self.load items

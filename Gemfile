@@ -37,8 +37,11 @@ gem 'jquery-rails'
 # Deploy with Capistrano
 # gem 'capistrano'
 
+group :test, :developmet do
+  gem "rspec-rails"
+  gem "factory_girl_rails"
+end
 
-gem "rspec-rails", ">= 2.6.0", :group => [:development, :test]
 group :test do
   # To use debugger
   gem 'ruby-debug19', :require => 'ruby-debug'
